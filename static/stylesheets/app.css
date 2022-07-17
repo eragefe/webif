@@ -1,0 +1,163 @@
+/* General ---------------------------------------------------------*/ *, :after, :before {
+
+    box-sizing: border-box;
+}
+body,
+html {
+    margin:0;
+    padding:0;
+}
+
+body{
+    width: 100%;
+    background-color: #000;
+    margin:0;
+}
+
+div#mainContent{
+    background-color: #000;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1rem;
+    color: #fff;
+}
+
+div#indexContent{
+    background-color: #000;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1rem;
+    color: #fff;
+}
+
+/* Select
+---------------------------------------------------------*/
+
+select.wifiNetworkInputs {
+    position: relative;
+    width: 70%;
+    background: #111;
+    color: #999;
+    border: #999 solid 1px;
+    outline: none;
+    font-size: 1rem;
+    margin: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.select {
+    width: 100%;
+    min-width: 15ch;
+    max-width: 30ch;
+    font-size: 0.9rem;
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    line-height: 3em;
+    background-color: #1c2b36;
+    color: #ffffcc;
+}
+
+.number {
+    position: relative;
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    font-size: 3rem;
+    cursor: pointer;
+    left: 0px
+}
+
+.wifiNetworkInputs{
+    width: 70%;
+    font-size: 1rem;
+    color: #fff;
+    background: #111;
+    border:#999 solid 1px;
+}
+
+.manualSSIDEntry{
+    font-size: 1rem;
+    color: #ffffcc;
+}
+
+.vol{
+    font-size: 3rem;
+    color: #ffffcc;
+    background-color: #000000;
+}
+
+.link{
+    font-size: 1.5rem;
+    color: #c29970;
+}
+
+.button{
+    border: 1px solid var(--select-border);
+    border-radius: 100%;
+    font-size: 1rem;
+    color: #ffffcc;
+    background-color: #1c2b36;
+}
+
+.button2{
+    color: #ffffff;
+    background-color: #1d2b2a;
+}
+
+/* Desktop
+---------------------------------------------------------*/
+
+@media (min-width: 800px) {
+    div#mainContent h1 {
+        font-size:4.5rem;
+    }
+    div#mainContent {
+        max-width:768px;
+    }
+
+@media (min-width: 800px) {
+    div#indexContent h1 {
+        font-size:4.5rem;
+    }
+    div#indexContent {
+        max-width:768px;
+    }
+
+    li.wifiNetwork:after {
+        content: '▼';
+        position: absolute;
+        width: 50px;
+        color: #deab04;
+        font-weight: bold;
+        font-size: 2rem;
+        right: 0px;
+        bottom: 50px;
+        border-radius: 3px;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+}
+
+/* Slider
+---------------------------------------------------------*/
+
+input[type=range] {
+    -webkit-appearance: none;
+    background-color: #334e61;
+    border-radius: 0.25em;
+    width: 240px;
+    height:10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: #ffffcc;
+    border-radius: 100%;
+    opacity: 0.8;
+    width: 6px;
+    height: 20px;}

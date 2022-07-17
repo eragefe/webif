@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div id="mainContent">
+    <p align="center"><a href="/"><img src="/static/gdis.png"></a></p>
+    <p align="center"><label>&nbsp;</label></p>
+    <p align="center"><label>&nbsp;</label></p>
+
+    <p align="center"><label for="menu">Type your WiFi network name</label></p>
+    <p align="center"><form action="{{ url_for('save_credentials') }}" method=post>
+    <p><input type="text" name="ssid", class="wifiNetworkInputs"></p>
+    <p align="center"><label>&nbsp;</label></p>   
+
+    <p align="center"><label for="wifi_key">Type your Wifi password</label></p>
+    <p><input type="password" name="wifi_key", class="wifiNetworkInputs"></p>
+    <p align="center"><label>&nbsp;</label></p>
+
+    <p><input type="submit", class="button" style="height:30px;width:150px"></p>
+    </form></p>
+  </div>
+{% endblock %}

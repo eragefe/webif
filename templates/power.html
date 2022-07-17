@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <div id="indexContent">
+     <p align="center"><a href="/"><img src="/static/gdis.png"></a></p>
+     <p align="center"><label>&nbsp;</label></p>
+     <p align="center"><label>&nbsp;</label></p>
+
+     <p align="center"><a href="{{ url_for('reboot') }}"><button class="button" style="height:40px;width:150px">Reboot</button></a></p>
+     <p align="center"><a href="{{ url_for('poweroff') }}"><button class="button" style="height:40px;width:150px">Power OFF</button></a></p>
+  </div>
+{% endblock %}
