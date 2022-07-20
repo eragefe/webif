@@ -123,7 +123,7 @@ def filter():
         os.system('amixer cset numid=5 0 >/dev/nul')
         os.system('amixer cset numid=4 0 >/dev/nul')
         os.system('echo "(Fast)" > /root/filter')
-    if filter == "min":
+    if filter == "min-phase":
         os.system('amixer cset numid=5 0 >/dev/nul')
         os.system('amixer cset numid=4 2 >/dev/nul')
         os.system('echo "(M-F)" > /root/filter')
@@ -141,14 +141,12 @@ def power():
 
 @app.route('/reboot', methods = ['GET', 'POST'])
 def reboot():
-    time.sleep(1)
-    os.system('reboot')
+    os.system('bash -c "sleep 1; reboot"&')
     return redirect('/')
 
 @app.route('/poweroff', methods = ['GET', 'POST'])
 def poweroff():
-    time.sleep(1)
-    os.system('poweroff')
+    os.system('bash -c "sleep 1; poweroff"&')
     return redirect('/')
 
 @app.route('/prev', methods = ['GET', 'POST'])
