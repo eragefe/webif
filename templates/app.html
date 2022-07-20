@@ -15,7 +15,7 @@ function makerequest() {
     });
 }
 
-window.onload = function(){
+  window.onload = function(){
   makerequest();
 }
 
@@ -37,10 +37,10 @@ window.onload = function(){
         <form action="/filter" method="post" >
            <select class="select" name="filter" onChange="this.form.submit();">
                 <option value="" disabled selected >Filter {{ filter }}</option>
-                <option value="nos">NOS</option>
-                <option value="slow">Slow</option>
-                <option value="fast">Fast</option>
-                <option value="min">Min-phase</option>
+                <option value="nos">N.O.S</option>
+                <option value="slow">Slow Rolloff</option>
+                <option value="fast">Fast Rolloff</option>
+                <option value="min">Minimal Phase</option>
             </select>
         </form>
         </td></tr></table>

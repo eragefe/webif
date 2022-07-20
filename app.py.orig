@@ -9,13 +9,11 @@ app.debug = True
 
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-    with open("/root/filter", "r") as f:
-         filter = f.read()
     with open("/root/vol", "r") as f:
          vol = f.read()
     with open("/root/input", "r") as f:
          input = f.read()
-    return render_template('app.html', vol=vol, input=input, filter=filter)
+    return render_template('app.html', vol=vol, input=input)
 
 @app.route('/wifi')
 def wifi():
@@ -35,59 +33,41 @@ def save_credentials():
     os.system('bash /tmp/wifi.tmp')
     with open("/root/vol", "r") as f:
          vol = f.read()
-    with open("/root/filter", "r") as f:
-         filter = f.read()
     with open("/root/input", "r") as f:
          input = f.read()
     return redirect('/')
 
 @app.route("/volume2", methods = ['GET', 'POST'])
 def volume2():
-    if request.method == 'POST':
-        a = request.form["c"]
-        create_file(a)
-        os.system('mpc volume $(cat /root/vol)> /dev/null 2>&1')
-        with open("/root/filter", "r") as f:
-             filter = f.read()
-        with open("/root/vol", "r") as f:
-             vol = f.read()
-        with open("/root/input", "r") as f:
-             input = f.read()
-        return redirect('/')
-    else:
-        with open("/root/vol", "r") as f:
-            vol = f.read()
-            return vol
+    a = request.form["c"]
+    create_file(a)
+    os.system('mpc volume $(cat /root/vol)> /dev/null 2>&1')
+    with open("/root/vol", "r") as f:
+         vol = f.read()
+    with open("/root/input", "r") as f:
+         input = f.read()
+    return redirect('/')
 
 @app.route("/volume", methods = ['GET', 'POST'])
 def volume():
-    if request.method == 'POST':
-        a = request.form["a"]
-        create_file(a)
-        os.system('mpc volume $(cat /root/vol)> /dev/null 2>&1')
-        with open("/root/filter", "r") as f:
-                filter = f.read()
-        with open("/root/vol", "r") as f:
-                vol = f.read()
-        with open("/root/input", "r") as f:
-                input = f.read()
-        return redirect('/')
-    else:
-        with open("/root/vol", "r") as f:
-            vol = f.read()
-            return vol
+    a = request.form["a"]
+    create_file(a)
+    os.system('mpc volume $(cat /root/vol)> /dev/null 2>&1')
+    with open("/root/vol", "r") as f:
+         vol = f.read()
+    with open("/root/input", "r") as f:
+         input = f.read()
+    return ('', 204)
 
 @app.route('/input', methods = ['GET', 'POST'])
 def input():
     input = request.form["input"]
     if input == "S1":
          os.system('amixer cset numid=2 0 >/dev/nul')
-         os.system('echo "(1)" > /root/input')
+         os.system('echo "SPDIF-1" > /root/input')
     if input == "S2":
          os.system('amixer cset numid=2 1 >/dev/nul')
-         os.system('echo "(2)" > /root/input')
-    with open("/root/filter", "r") as f:
-         filter = f.read()
+         os.system('echo "SPDIF-2" > /root/input')
     with open("/root/vol", "r") as f:
          vol = f.read()
     with open("/root/input", "r") as f:
@@ -101,34 +81,6 @@ def test():
         os.system('bash /root/test')
     if test == "net":
         os.system('bash /root/net')
-    with open("/root/filter", "r") as f:
-         filter = f.read()
-    with open("/root/vol", "r") as f:
-         vol = f.read()
-    with open("/root/input", "r") as f:
-         input = f.read()
-    return redirect('/')
-
-@app.route('/filter', methods = ['GET', 'POST'])
-def filter():
-    filter = request.form["filter"]
-    if filter == "nos":
-        os.system('amixer cset numid=5 1 >/dev/nul')
-        os.system('echo "(N.O.S)" > /root/filter')
-    if filter == "slow":
-        os.system('amixer cset numid=5 0 >/dev/nul')
-        os.system('amixer cset numid=4 1 >/dev/nul')
-        os.system('echo "(Slow Rolloff)" > /root/filter')
-    if filter == "fast":
-        os.system('amixer cset numid=5 0 >/dev/nul')
-        os.system('amixer cset numid=4 0 >/dev/nul')
-        os.system('echo "(Fast Rolloff)" > /root/filter')
-    if filter == "min":
-        os.system('amixer cset numid=5 0 >/dev/nul')
-        os.system('amixer cset numid=4 2 >/dev/nul')
-        os.system('echo "(Minimal Phase)" > /root/filter')
-    with open("/root/filter", "r") as f:
-         filter = f.read()
     with open("/root/vol", "r") as f:
          vol = f.read()
     with open("/root/input", "r") as f:
@@ -141,57 +93,51 @@ def power():
 
 @app.route('/reboot', methods = ['GET', 'POST'])
 def reboot():
-    os.system('bash -c "sleep 1; reboot"&')
+    time.sleep(1)
+    os.system('reboot')
     return redirect('/')
 
 @app.route('/poweroff', methods = ['GET', 'POST'])
 def poweroff():
-    os.system('bash -c "sleep 1; poweroff"&')
+    time.sleep(1)
+    os.system('poweroff')
     return redirect('/')
 
 @app.route('/prev', methods = ['GET', 'POST'])
 def prev():
     os.system('mpc prev')
-    with open("/root/filter", "r") as f:
-         filter = f.read()
     with open("/root/vol", "r") as f:
          vol = f.read()
     with open("/root/input", "r") as f:
          input = f.read()
-    return redirect('/')
+    return ('', 204)
 
 @app.route('/play', methods = ['GET', 'POST'])
 def play():
     os.system('mpc toggle')
-    with open("/root/filter", "r") as f:
-         filter = f.read()
     with open("/root/vol", "r") as f:
          vol = f.read()
     with open("/root/input", "r") as f:
          input = f.read()
-    return redirect('/')
+    return ('', 204)
 
 @app.route('/stop', methods = ['GET', 'POST'])
 def stop():
     os.system('mpc stop')
-    with open("/root/filter", "r") as f:
-         filter = f.read()
     with open("/root/vol", "r") as f:
          vol = f.read()
     with open("/root/input", "r") as f:
          input = f.read()
-    return redirect('/')
+    return ('', 204)
 
 @app.route('/next', methods = ['GET', 'POST'])
 def next():
     os.system('mpc next')
-    with open("/root/filter", "r") as f:
-         filter = f.read()
     with open("/root/vol", "r") as f:
          vol = f.read()
     with open("/root/input", "r") as f:
          input = f.read()
-    return redirect('/')
+    return ('', 204)
 
 ######## FUNCTIONS ##########
 
@@ -216,7 +162,13 @@ def scan_wifi_networks():
 
 def create_wpa_supplicant(ssid, wifi_key):
 
-        os.system('nmcli con add ifname wlan0 type wifi ssid ' + ssid + ' wifi-sec.key-mgmt wpa-psk wifi-sec.psk ' + wifi_key + ' ')
+    temp_conf_file = open('/tmp/wifi.tmp', 'w')
+
+    temp_conf_file.write('#!/bin/bash\n')
+    temp_conf_file.write('\n')
+    temp_conf_file.write('nmcli r wifi on\n')
+    temp_conf_file.write('nmcli d wifi connect ' + ssid + '  password  ' + wifi_key + '\n')
+    temp_conf_file.close
 
 if __name__ == '__main__':
     app.run(host = '0.0.0.0', port = 80)
