@@ -5,12 +5,17 @@
 <script language="JavaScript" type="text/javascript" src=" {{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
 <script>
 function makerequest() {
-    $.ajax({
+    $.ajax(
+{
         url: '/volume',
         success: function(response) {
-            document.getElementById("a").setAttribute('value', response);
-            document.getElementById("c").setAttribute('value', response);
-	    setTimeout(makerequest, 100);
+                if((document.getElementById("a").getAttribute('value') != response ||
+                document.getElementById("c").getAttribute('value') != response) && response != '')
+                {
+                    document.getElementById("a").setAttribute('value', response);
+                    document.getElementById("c").setAttribute('value', response);
+                }
+                setTimeout(makerequest, 100);
         }
     });
 }
